@@ -9,14 +9,11 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // ignore: deprecated_member_use
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text('Health'),
-        // ignore: deprecated_member_use
         backgroundColor: Colors.white,
-        // ignore: deprecated_member_use
-        surfaceTintColor: Colors.white,
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Column(

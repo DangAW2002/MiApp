@@ -21,7 +21,7 @@ class _DevicesPageState extends State<DevicesPage> {
           _deviceIdController.clear();
           _showDeviceField = false;
         });
-        
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: const Text(
@@ -74,7 +74,8 @@ class _DevicesPageState extends State<DevicesPage> {
               const Divider(),
               ListTile(
                 leading: const Icon(Icons.delete_outline, color: Colors.red),
-                title: const Text('Remove Device', 
+                title: const Text(
+                  'Remove Device',
                   style: TextStyle(color: Colors.red),
                 ),
                 onTap: () {
@@ -107,6 +108,7 @@ class _DevicesPageState extends State<DevicesPage> {
       appBar: AppBar(
         title: const Text('Devices'),
         backgroundColor: Colors.white,
+        automaticallyImplyLeading: false,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -118,44 +120,44 @@ class _DevicesPageState extends State<DevicesPage> {
                 children: [
                   if (_showDeviceField) ...[
                     TextFormField(
-                    cursorColor: Colors.blue,
-                    controller: _deviceIdController,
-                    decoration: const InputDecoration(
-                      labelText: 'Device ID',
-                      labelStyle: TextStyle(color: Colors.blue),
-                      hintText: 'Enter device ID',
-                      border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
+                      cursorColor: Colors.blue,
+                      controller: _deviceIdController,
+                      decoration: const InputDecoration(
+                        labelText: 'Device ID',
+                        labelStyle: TextStyle(color: Colors.blue),
+                        hintText: 'Enter device ID',
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
                       ),
-                      enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.blue),
-                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a device ID';
+                        }
+                        return null;
+                      },
                     ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                      return 'Please enter a device ID';
-                      }
-                      return null;
-                    },
-                    ),
-                  const SizedBox(height: 8),
+                    const SizedBox(height: 8),
                   ],
                   ElevatedButton.icon(
-                  onPressed: _handleAddDevice,
-                  icon: const Icon(Icons.add, color: Colors.white),
-                  label: Text(
-                    _showDeviceField ? 'Connect' : 'Add Device',
-                    style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    onPressed: _handleAddDevice,
+                    icon: const Icon(Icons.add, color: Colors.white),
+                    label: Text(
+                      _showDeviceField ? 'Connect' : 'Add Device',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                    ),
                   ),
                 ],
               ),
@@ -167,11 +169,21 @@ class _DevicesPageState extends State<DevicesPage> {
                 itemBuilder: (context, index) {
                   return Card(
                     child: ListTile(
-                      leading: const Icon(Icons.watch, size: 32), // Changed to watch icon
+                      leading: const Icon(
+                        Icons.watch,
+                        size: 32,
+                      ), // Changed to watch icon
                       title: Text(_connectedDevices[index]),
                       subtitle: const Text('Connected'),
-                      trailing: const Icon(Icons.check_circle, color: Colors.green),
-                      onLongPress: () => _showDeviceOptions(_connectedDevices[index], index),
+                      trailing: const Icon(
+                        Icons.check_circle,
+                        color: Colors.green,
+                      ),
+                      onLongPress:
+                          () => _showDeviceOptions(
+                            _connectedDevices[index],
+                            index,
+                          ),
                     ),
                   );
                 },
